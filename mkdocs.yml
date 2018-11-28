@@ -1,0 +1,14 @@
+site_name: Unofficial Symphony Documentation
+site_url: http://docs.stratodemo.com
+site_description: Symphony documentation testing with MkDocs
+site_author: Aries
+
+repo_url: https://github.com/aries-strato/stratodocs/
+edit_uri: ""
+
+theme:
+  name: mkdocs
+  highlightjs: true
+
+plugins:
+  - search
