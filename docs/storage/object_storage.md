@@ -11,6 +11,60 @@ Instead, the user employs known the known web protocols HTTP / HTTPS to upload a
 
 The user can use a simple browser or many other common S3 tools.
 
+# Set up and use object storage
+
+**Admin users only**
+
+To set up object storage for the first time you must be an Admin user in the Stratoscale Symphony region.
+
+Functionality is exposed:
+
+-   In the GUI under  **Menu**  >  **Storage**  >  **Object Storage**.
+-   In the CLI:
+    -   Admin functionality for using the  `symp`  client to work with object stores is exposed in the [`object-stores`commands](https://www.stratoscale.com/knowledge/object-stores).
+    -   End user functionality is exposed by using the  [AWS CLI for S3](http://docs.aws.amazon.com/cli/latest/userguide/using-s3-commands.html).
+
+**Required administrator task - initialize service and create object store**
+
+Before users can use object storage features, an administrator must initialize the object storage service.
+
+To do this:
+
+1. Click  **Menu**  >  **Storage**  >  **Object Storage**  >  **Initialize**.
+
+The system initializes the object storage system.
+
+2. The Create Object Store window appears.
+
+Specify  **Storage Pool**  and  **Size**  (in GB).
+
+This is the object store for the  **entire**  Symphony region, so be sure to allocate resources accordingly.
+
+If you need to change the object store later on...
+
+If you need to change the size of the object store later on, you can use the Symphony CLI to delete the existing object store and create a new one. However, be aware that you will lose all the data in the original object store.
+
+To delete an existing object store and create a new one first log in as an Admin user via Symphony CLI:
+
+ To find the ID of the existing object store
+    
+    Symphony @ cloud_admin/default > object-stores list
+    +--------+--------------------------------------+
+    | status | mancala_volume_id                    |
+    +--------+--------------------------------------+
+    | Ready  | b1638b75-67fb-4f01-a196-3e0408079710 |
+    +--------+--------------------------------------+
+    
+To delete the existing object store
+    
+    Symphony @ cloud_admin/default > object-stores delete {object_store_id / b1638b75-67fb-4f01-a196-3e0408079710}
+    
+ To create a new object store
+    
+    Symphony @ cloud_admin/default > object-stores create --storage-pool <STORAGE_POOL_NAME> --size-mb <SIZE_IN_MB>
+
+
+
 # Objects and Buckets
 
 Creating and deleting  **buckets**:
