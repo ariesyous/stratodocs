@@ -7,7 +7,7 @@ repo_url: https://github.com/aries-strato/stratodocs/
 edit_uri: ""
 
 theme:
-  name: mkdocs
+  name: readthedocs
   highlightjs: true
 
   
