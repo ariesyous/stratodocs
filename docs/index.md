@@ -1,4 +1,4 @@
-## Welcome to the unofficial Symphony documentation!
+Welcome to the unofficial Symphony documentation!
 
 Use the left navigation pane to browse topics and articles, and you can also use the Search bar to look up any topics you're interested in.
 
