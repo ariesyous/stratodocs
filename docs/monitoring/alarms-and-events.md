@@ -108,8 +108,6 @@ entity_type:vm
 
 # Symphony-supported AWS – SNS APIs and Parameters
 
-## Introduced: **Symphony v5.1.1**
-
 Below is a list of the AWS - SNS APIs that Symphony supports, together with their supported Required and Optional request parameters.
 
 Click on the API name to access the complete AWS documentation for that action.
