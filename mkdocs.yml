@@ -10,10 +10,8 @@ theme:
   name: mkdocs
   highlightjs: true
 
-nav:
-  - Home: index.md
   
 plugins:
   - search
 
-copyright: Stratoscale 
+copyright: Copyright 2018, 2019 Stratoscale Inc.
