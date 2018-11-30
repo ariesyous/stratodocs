@@ -1,4 +1,4 @@
-# Supermicro Server
+# Supermicro Server Reccomendations
 
 This guide provides a list of tasks that Stratoscale recommends you complete before starting your Stratoscale Symphony installation. Completing these tasks is important to help ensure that your installation proceeds smoothly.
 

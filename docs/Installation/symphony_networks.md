@@ -1,4 +1,4 @@
-# The Symphony Infrastructure Networks
+# Symphony Infrastructure Networks
 
 To ensure the successful installation of Stratoscale Symphony, it is necessary to understand the basic network concepts of the system.
 
