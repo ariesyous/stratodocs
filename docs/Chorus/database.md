@@ -1,4 +1,4 @@
-# Database as a Service
+# Database
 
 ## DBaaS Overview
 
