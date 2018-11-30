@@ -1,6 +1,8 @@
-# Database Overview 
+# Database as a Service
 
-Symphony Database as a Service allows you to provision a variety of relational and non-relational databases with the click of a button. 
+## DBaaS Overview
+
+Symphony Database as a Service allows you to provision a variety of relational and non-relational databases with the click of a button. This is an RDS-compatible solution, you can also use AWS compatible API's to work with this service.
 
 **To set up and use the database service**:
 
