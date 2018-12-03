@@ -21,7 +21,7 @@ Symphony offers Kubernetes (K8S) as a service, providing a platform for automati
 6.  Each kubernetes node must have at least 2 vCPUs and 1024MB RAM
     
 
-### **To create a Kubernetes Cluster**:
+**To create a Kubernetes Cluster**:
 
 1.  On the main menu select **Containers** > **Kubernetes**.  
     The **Containers - Kubernetes** view appears with a list of all of the Kubernetes clusters in the region.  
