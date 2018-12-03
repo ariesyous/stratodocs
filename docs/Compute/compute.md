@@ -351,10 +351,211 @@ When you launch a VM, a boot volume based on the image you selected for that VM 
 -   [Extend the size of the volume](https://www.stratoscale.com/knowledge/extending-the-size-of-a-volume)
 -   [Add storage volumes to a VM](https://www.stratoscale.com/knowledge/attaching-a-volume-to-a-virtual-machine)
 
+# Migrating a Virtual Machine to Another Node
 
+By default, Symphony places a running VM on a certain node according to its internal analysis of the state of the cluster. When changes occur in the system load, performance, and scale, Symphony can automatically migrate the VM to another node to rebalance and optimize the system resources. In addition to the automatic placement and migration,Symphony enables you to determine on which node the VM will run, and allows you to move a VM from one node to another by using the Migrate option.
 
+**To migrate a VM to another node**:
 
+1. On the  **Compute**  view  **Virtual Machine**  widget, locate the required VM and select it.
 
+The selected VM details appear on the bottom of the window:
+
+![](https://www.stratoscale.com/wp-content/uploads/Compute20VM20-20Migrate20VM20Button20620DP.jpg)
+
+2. To move the Virtual Machine to another node, click the  **Migrate**  button on the selected VM's Action icon menu.
+
+The Migrate VM dialog box appears.
+
+![](https://www.stratoscale.com/wp-content/uploads/Compute20VM20-20Migrate20VM20Dialog20620DP.jpg)
+
+3. From the  **Select Node**  drop-down list, select the node to which you want to migrate the VM, and click OK.
+
+The status of the VM changes to  **Migrating**  during the migration process.
+
+![](https://www.stratoscale.com/wp-content/uploads/Compute20VM20-20Migrate20VM20Success20620DP.jpg)
+
+Once the migration process ends, the status of the VM changes back to  **Active**, and it is now located on the selected node.
+
+# Deleting a Virtual Machine
+
+You can delete VMs that are in Shutoff status. If you want to delete a running VM, stop it first, and then delete it from the system.
+
+**To delete a VM**:
+
+1. On the Compute view Virtual Machines widget, locate the required VM and select it.
+
+The selected VM details appear on the bottom of the window:
+
+If your VM is running, click the  **Stop**  button to stop it, since you cannot delete a running machine.
+
+2. Click the  **Delete**  button on the selected VM's Action icon menu.
+
+A confirmation message appears, asking you to approve the deletion:
+
+3. Click  **OK**  to delete the VM.
+
+The VM is now deleted from the system.
+
+# Protecting a Virtual Machine
+
+After you create a VM, you can attach one or more Data Protection Plans to it.
+
+**Note**:You can attach a Data Protection Plan to a VM only if its Status is Shutoff.
+
+If its Status is Active, you must first [stop the virtual machine](https://www.stratoscale.com/pages/viewpage.action?pageId=333168). This will change its Status to Shutoff.
+
+# Protecting a VM via the Symphony GUI
+
+**To protect a VM via the Symphony GUI**
+
+1.  On the  **Compute - Virtual Machines**  view, locate the VM which you wish to protect. Note that its Protection is not checked and that its Status is "Shutoff".
+2.  Click on the Actions icon on its right and select  **Protect**.
+    
+    The Protect VM dialog box appears.
+    
+3.  In the Protection Plans dropdown, add or remove as many protection plans as you wish, and click  **OK**.
+    
+    In the Compute - Virtual Machines view its Protection column is checked, indicating that the VM is protected.  
+    **Note**: Use the Protect VM dialog box to also remove the protection of the VM.
+    
+4.  To Start the Virtual Machine click the Actions icon and then the  **Start**  button.
+
+# Recovering a Windows Virtual Machine
+
+If a Windows-based VM that was  [imported from VMware or Hyper-V](https://www.stratoscale.com/knowledge/migrating-a-vm-from-vmware-into-symphony-via-the-gui), is prevented from having its storage and network drivers injected, it will not start properly (it will start in a blue screen) When this happens, the instance must first be started via the  **Recover**  button.
+
+**To recover a Windows VM**:
+
+1.  On the  **Compute** >  **Instances**  > view, click on the instance to be recovered.  
+    This will display the detailed view of that instance.
+2.  Click on the  **More**  button and select the  **Recover**  option.  
+    This pops-up the **VM Recovery**  confirmation message.
+    
+    ![](https://www.stratoscale.com/wp-content/uploads/Compute20VMs_57_Virtual20Machines_VM20Recovery20confirmation20message.jpg)
+    
+3.  Click  **OK**  to recover the VM. This will install the storage and network drivers on the VM.  
+    Next startup you'll be able to start the Instance via the **Start** button.
+
+# Associating a Security Group with a Virtual Machine
+
+To limit the inbound and outbound traffic of a VM, you can associate a security group with it.
+
+**Note**: If a security group is not specified, a port is associated with a default security group. The default security group allows both ingress and egress traffic. Security rules can be added to the default security group to change the traffic behavior.
+
+**To associate a security group with a VM**:
+
+1. On the  **Compute - Virtual Machines**  view click on the name of the VM with which you wish to associate a security group.
+
+![](https://www.stratoscale.com/wp-content/uploads/Compute20VMs_62_List20of20VMs.jpg)
+
+This accesses the view of the selected VM at the Overview tab.
+
+![](https://www.stratoscale.com/wp-content/uploads/Compute20VMs_63_Specific20VM2BOverview20tab.jpg)
+
+2. Display the  **Security Groups**  tab and click  **Attach Security Group**.
+
+![](https://www.stratoscale.com/wp-content/uploads/Compute20VMs_59_Specifc20Virtual20Machine_Security20Group20tab_Attach20Security20Group20button28129.jpg)
+
+The Attach Security Group dialog box appears:
+
+![](https://www.stratoscale.com/wp-content/uploads/Compute20VMs_60_Specifc20Virtual20Machine_Security20Group20tab_Attach20Security20Group20dialog.jpg)
+
+3. Select the Security Group which you wish to associate with the VM and the Network on the VM to whose port this Security Group will be attached, and click  **OK**.
+
+The selected VM is now associated with a Security Group.
+
+![](https://www.stratoscale.com/wp-content/uploads/Compute20VMs_61_Specifc20Virtual20Machine_Security20Group20tab_Newly20Associated20Security20Group.jpg)
+
+# Enabling Secure SSH Access to a VM
+
+You can use Symphony to enable secure SSH access to a VM, using a key pair.
+
+To do this:
+
+1.  [Make sure network requirements are in place (floating IP allocated to an edge network)](https://www.stratoscale.com/knowledge/compute-2/secure-ssh-access-to-a-vm/enabling-secure-ssh-access-to-a-vm/#EnablingSecureSSHAccesstoaVM-Network).
+2.  [Generate a key pair and register it with Symphony](https://www.stratoscale.com/knowledge/compute-2/secure-ssh-access-to-a-vm/enabling-secure-ssh-access-to-a-vm/#EnablingSecureSSHAccesstoaVM-Key).
+3.  [Create the VM and, during creation, associate the VM with the key pair you just registered with Symphony. Attach the the edge network's floating IP to the VM](https://www.stratoscale.com/knowledge/compute-2/secure-ssh-access-to-a-vm/enabling-secure-ssh-access-to-a-vm/#EnablingSecureSSHAccesstoaVM-VM).
+4.  [SSH into the VM, passing in the floating IP and your private key](https://www.stratoscale.com/knowledge/compute-2/secure-ssh-access-to-a-vm/enabling-secure-ssh-access-to-a-vm/#EnablingSecureSSHAccesstoaVM-SSH).
+
+## Make sure network requirements are in place
+
+You need an edge network that has a floating IP allocated to it.
+
+If these are not already present in your system:
+
+1.  [Create an edge network (Networking>Networks>Create>Type=Edge)](https://www.stratoscale.com/knowledge/video---how-to-create-an-edge-network).
+2.  [Allocate a floating IP to the edge network (Networking>Floating IPs>Allocate)](https://www.stratoscale.com/knowledge/video---how-to-allocate-a-floating-ip).
+
+## Generate a key pair
+
+You can either:
+
+-   [Have Symphony generate a key pair for you](https://www.stratoscale.com/knowledge/compute-2/secure-ssh-access-to-a-vm/enabling-secure-ssh-access-to-a-vm/#EnablingSecureSSHAccesstoaVM-Sympgenerates).
+    
+    If you do this, Symphony automatically registers the public key, then downloads the private key to your machine.
+    
+-   [Generate your own key pair and register the public key with Symphony](https://www.stratoscale.com/knowledge/compute-2/secure-ssh-access-to-a-vm/enabling-secure-ssh-access-to-a-vm/#EnablingSecureSSHAccesstoaVM-Yougenerate).
+
+### If you want to have Symphony generate a key pair for you
+
+Click  **Compute > Key Pairs > Create**.
+
+This displays the Generate Key Pair wizard.
+
+<table class="wrapped confluenceTable"><colgroup><col><col></colgroup><tbody><tr><th class="highlight-blue confluenceTh" colspan="2" data-highlight-colour="blue" style="text-align: center;">Details tab</th></tr><tr><td class="confluenceTd"><strong>Name</strong></td><td class="confluenceTd">Type in the name of the key pair you are creating.</td></tr><tr><td class="confluenceTd"><strong>Radio Buttons<br></strong></td><td class="confluenceTd">Select the radio button that asks Symphony to generate a key pair and download the private key.</td></tr><tr><td class="confluenceTd"><strong>Next</strong></td><td class="confluenceTd">Click <strong>Next</strong> to generate the key pair. The system displays the Result tab.</td></tr><tr><td class="highlight-blue confluenceTd" colspan="2" data-highlight-colour="blue" style="text-align: center;"><strong>Result tab</strong></td></tr><tr><td colspan="2" class="confluenceTd">The system generates a public key (which it keeps), and a private key (which you need to download).</td></tr><tr><td class="confluenceTd"><strong>Name</strong></td><td class="confluenceTd">The system displays the name of the key pair.</td></tr><tr><td class="confluenceTd"><strong>Fingerprint</strong></td><td class="confluenceTd">The system displays the public key's fingerprint.</td></tr><tr><td class="confluenceTd"><strong>Save</strong></td><td class="confluenceTd">The system also displays a <strong>Save</strong> button, along with a message telling you to save the private key. Click the <strong>Save</strong> button.<p></p><p>The system downloads the private key to your browser's default download location. The private key file is named:</p><p><code>&lt;name&gt;.pem</code></p><p>Where <code>&lt;name&gt;</code> is the name of the key pair you specified in the Details step.</p></td></tr></tbody></table>
+
+### If you want to generate your own key pair and register the public key with Symphony
+
+1. Start by using a tool of your choice to generate a key pair (public and private key). Example:
+
+`$ ssh-keygen`
+
+Change the file permissions on the private key to 400 or 600 to secure the key. Example:
+
+`$ chmod 400 id_rsa`
+
+2. Register the public key with Symphony:
+
+Click  **Compute > Key Pairs > Create**.
+
+This displays the Generate Key Pair wizard.
+
+<table class="wrapped confluenceTable"><colgroup><col><col></colgroup><tbody><tr><th class="highlight-blue confluenceTh" colspan="2" data-highlight-colour="blue" style="text-align: center;">Details tab</th></tr><tr><td class="confluenceTd"><strong>Name</strong></td><td class="confluenceTd">Type in the name of the key pair you are creating.</td></tr><tr><td colspan="1" class="confluenceTd"><strong>Radio Buttons</strong></td><td colspan="1" class="confluenceTd">Select the radio button for uploading a key pair that you created using another tool. The system displays the <strong>Public Key</strong> dialog box.</td></tr><tr><td class="confluenceTd"><strong>Public Key</strong></td><td class="confluenceTd">Drag and drop the public key file onto the dialog box, or click the <strong>Browse</strong> button and navigate to it.</td></tr><tr><td class="confluenceTd"><strong>Generate</strong></td><td class="confluenceTd">Click the <strong>Next&nbsp;</strong> button. The system displays the <strong>Result</strong> tab.</td></tr><tr><td class="highlight-blue confluenceTd" colspan="2" data-highlight-colour="blue" style="text-align: center;"><strong>Result tab</strong></td></tr><tr><td colspan="2" class="confluenceTd">This displays the public key name and fingerprint.</td></tr><tr><td class="confluenceTd"><strong>Name</strong></td><td class="confluenceTd">The system displays the name of the key pair.</td></tr><tr><td class="confluenceTd"><strong>Fingerprint</strong></td><td class="confluenceTd">The system displays the public key's fingerprint.</td></tr></tbody></table>
+
+## Create VM and specify key pair and floating IP
+
+You need to create a VM and, during creation, associate the VM with the key pair you just registered with Symphony. You then need to attach the edge network's floating IP to the VM.
+
+### Associate key pair with VM:
+
+You associate a key pair with a VM as part of the  [VM creation process](https://www.stratoscale.com/knowledge/creating-a-virtual-machine).
+
+1. Display the  **Initialize**  tab in the Create VM wizard.
+
+2. Click the  **Key Pair**  drop-down and select the key pair you want to inject into the VM.
+
+### Attach floating IP to VM:
+
+1. After you create the VM, click:
+
+**Compute > Instances > name of VM**
+
+This displays the details view.
+
+2. Click the  **Floating IPs**  tab, then the  **Attach**  button. Select a floating IP from the Floating IP drop down menu.
+
+## SSH into the VM
+
+You can now SSH into the VM, using the following syntax:
+
+`$ ssh -i <private_key_file> <default_username_for_image>@<floating_ip>`
+
+In the following example, the private key file is  `id_rsa`, and the default username for the image that the VM is based on is  `fedora`. The floating IP is  `192.237.248.66`.
+
+Example:
+
+`$ ssh -i id_rsa fedora@192.237.248.66`
 
 
 # Symphony-supported AWS – EC2 APIs and Parameters
