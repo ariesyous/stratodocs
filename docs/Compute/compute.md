@@ -557,6 +557,161 @@ Example:
 
 `$ ssh -i id_rsa fedora@192.237.248.66`
 
+# Using a GPU Card with a VM
+
+**Use case overview**:
+
+You may want to use a VM for data science or other applications that require very fast math calculations. This VM would benefit from being able to use a GPU (Graphic Processing Unit) to do these calculations.
+
+**To make a GPU available to a VM**:
+
+1. Physically install the GPU card(s) on any Symphony node.
+
+2.  [Configure Symphony to use the GPU](https://www.stratoscale.com/knowledge/compute-2/using-a-gpu-card-with-a-vm/#UsingaGPUCardwithaVM-Config).
+
+3.  [Create an instance type that utilizes the GPU](https://www.stratoscale.com/knowledge/compute-2/using-a-gpu-card-with-a-vm/#UsingaGPUCardwithaVM-Instance).
+
+4.  [Create a VM that is based on the GPU instance type you just created](https://www.stratoscale.com/knowledge/compute-2/using-a-gpu-card-with-a-vm/#UsingaGPUCardwithaVM-VM).
+
+## Configure Symphony to Use a GPU
+
+**Enable PCI passthrough**
+
+Run the following inspector command from any node to update the grub file and to add the nouveau driver to the blacklist:
+
+	$ inspector tools compute gpu grub
+
+	### Expected output:
+
+	[inspector] Start running gpu_grub
+	[inspector] Copying /etc/default/grub files to nodes 
+	[inspector] Validating copied files
+	[inspector] grub file was copied to all nodes
+	[inspector] Generate the GRUB configuration file on all nodes
+	[inspector] Finished running command : tools
+
+**Configure specific GPU devices for use**
+
+First, you need to find out the vendor name(s) of the GPU devices in the cluster.
+
+To validate that a vendor name is correct, you can use the following command in a node with a GPU from that vendor:
+
+	$ lspci -nn | grep -i vendor-name
+
+-   If you can see PCI devices from your specified vendor in the output, move on to the next inspector command.
+-   If you can't find PCI devices from the vendor you specified, list all the PCI devices and go through that list until you find the correct one.
+
+Once you have the vendor name(s), run the following inspector command from any node:
+
+	$ inspector tools compute gpu vfio --vendor-name-list gpu-vendor-1 gpu-vendor-2
+
+Note that only the PCI devices that are GPUs are displayed as configured.
+
+The GPUs are identified by their class IDs. The table below lists all the display PCI classes and whether PCI devices of these classes are considered to be GPUs:
+
+<table class="wrapped confluenceTable"><colgroup><col><col><col></colgroup><tbody><tr><th class="confluenceTh">Class Name</th><th class="confluenceTh">Class Id</th><th colspan="1" class="confluenceTh">Considered to be a GPU?</th></tr><tr><td class="confluenceTd">VGA compatible controller</td><td class="confluenceTd">0300</td><td colspan="1" class="confluenceTd">YES</td></tr><tr><td class="confluenceTd">XGA compatible controller</td><td class="confluenceTd">0301</td><td colspan="1" class="confluenceTd">YES</td></tr><tr><td class="confluenceTd">3D controller</td><td class="confluenceTd">0302</td><td colspan="1" class="confluenceTd">YES</td></tr><tr><td class="confluenceTd">Display controller</td><td class="confluenceTd">0380</td><td colspan="1" class="confluenceTd">NO</td></tr></tbody></table>
+
+**Example**:
+
+This example runs the command in a cluster with NVIDIA Tesla P100 GPU devices, where one device is in node 'stratonode0' and two devices are in node 'stratonode1'.
+
+	$ inspector tools compute gpu vfio --vendor-name-list nvidia
+
+	### Expected output:
+
+	[inspector] Start running gpu_vfio
+	[inspector] Current PCI devices claimed by vfio driver are ['10de:15f7']
+	+----------------+--------------+-------------+---------------+--------------+-----------+---------------+--------------------+--------------------+-------+-----------+
+	| SUBDEVICE_NAME | SUBDEVICE_ID | HOSTNAME    | CLASS_NAME    | SUBVENDOR_ID | VENDOR_ID | DEVICE_NAME   | VENDOR_NAME        | SUBVENDOR_NAME     | CLASS | DEVICE_ID |
+	+----------------+--------------+-------------+---------------+--------------+-----------+---------------+--------------------+--------------------+-------+-----------+
+	| [Device 11da]  | 11da         | stratonode0 | 3D controller | 10de         | 10de      | [Device 15f7] | NVIDIA Corporation | NVIDIA Corporation | 0302  | 15f7      |
+	+----------------+--------------+-------------+---------------+--------------+-----------+---------------+--------------------+--------------------+-------+-----------+
+	| [Device 11da]  | 11da         | stratonode1 | 3D controller | 10de         | 10de      | [Device 15f7] | NVIDIA Corporation | NVIDIA Corporation | 0302  | 15f7      |
+	+----------------+--------------+-------------+---------------+--------------+-----------+---------------+--------------------+--------------------+-------+-----------+
+	| [Device 11da]  | 11da         | stratonode1 | 3D controller | 10de         | 10de      | [Device 15f7] | NVIDIA Corporation | NVIDIA Corporation | 0302  | 15f7      |
+	+----------------+--------------+-------------+---------------+--------------+-----------+---------------+--------------------+--------------------+-------+-----------+
+	[inspector] Copying /etc/modprobe.d/vfio.conf files to nodes 
+	[inspector] Validating copied files
+	[inspector] Copying /etc/modules-load.d/vfio-pci.conf files to nodes 
+	[inspector] Validating copied files
+	[inspector] Finished running command : tools
+
+**Shut down and restart all physical servers (stratonodes) that have GPU devices**
+
+To do this, follow the cluster shut down and power up instructions  [here](https://www.stratoscale.com/knowledge/shutting-down-and-powering-up-a-cluster).
+
+**Validate configuration**
+
+Run this command from any node:
+
+	$ inspector tools compute gpu validate --vendor-name-list gpu-vendor-1 gpu-vendor-2
+
+	### Expected output:
+
+	[inspector] Start running gpu_validate
+	+-------------------------------------+--------+-----------------------------------+
+	| VALIDATION                          | STATUS | DETAILS                           |
+	+-------------------------------------+--------+-----------------------------------+
+	| Nova configuration file             | PASSED | {}                                |
+	|                                     |        |                                   |
+	+-------------------------------------+--------+-----------------------------------+
+	| PCI devices are visible to nodedapi | PASSED | 10de:15f7:                        |
+	|                                     |        |   max_in_node: 2                  |
+	|                                     |        |   total_quantity: 3               |
+	|                                     |        |                                   |
+	+-------------------------------------+--------+-----------------------------------+
+	| PCI devices claimed by VFIO driver  | PASSED | stratonode0:                      |
+	|                                     |        | - device_name: '[Device 15f7]'    |
+	|                                     |        |   vendor_name: NVIDIA Corporation |
+	|                                     |        | stratonode1:                      |
+	|                                     |        | - device_name: '[Device 15f7]'    |
+	|                                     |        |   vendor_name: NVIDIA Corporation |
+	|                                     |        | - device_name: '[Device 15f7]'    |
+	|                                     |        |   vendor_name: NVIDIA Corporation |
+	|                                     |        |                                   |
+	+-------------------------------------+--------+-----------------------------------+
+	| VT-d and intel_iommu                | PASSED | {}                                |
+	|                                     |        |                                   |
+	+-------------------------------------+--------+-----------------------------------+
+
+	[inspector] Finished running command : tools
+
+-   If the status of a validation is 'PASSED' then you can ignore the empty curly brackets ('{}').
+-   If the status of the 'nodedapi' validation is 'PASSED', then you can see some statistics about the PCI devices that can be used in the cluster.
+-   `max_in_node`  is the highest number of PCI devices of a given type that are present in a  **single**  node.
+-   `total_quantity`  is the total number of PCI devices of a given type that are present in  **all**  nodes together.
+
+## Create an Instance Type for the GPU
+
+Within the Symphony GUI, click  **Menu**  >  **Compute**  >  **Instance Types**  >  **Create**. This displays the Create Instance Type dialog box.
+
+Toggle the  **PCI Devices**  button to ON. This displays a  **Device**  list, and an  **Amount**  field.
+
+-   Use the  **Device**  list to specify the GPU you want to use for this instance type. You can filter by the type, vendor ID and device ID of the PCI device.
+-   In the  **Amount**  field, specify how many cards of this type you want to use. The amount can be any number between 1 and the maximum number of GPU cards of that type that are present in a single node.
+    
+    Example:
+    
+    Suppose you have 4 nodes:
+    
+    node A has 3 cards of a Type-X GPU
+    
+    node B has 2 cards of a Type-X GPU
+    
+    node C has 1 card of a Type-X GPU
+    
+    node D has 0 cards of a Type-X GPU
+    
+    When you create a Type-X GPU instance type in this environment, you can set the  **Amount**  field to a max of 3, because that is the highest number of cards present in a single node (in this example, node A).
+    
+
+## Create a VM that Uses the GPU
+
+To create a VM that uses the GPU, simply select the GPU instance type when you create the VM:
+
+**Menu**  >  **Compute**  >  **Instances**  >  **Create**.
+
+In the  **Instance Types**  drop down menu, select the GPU instance type.
 
 # Symphony-supported AWS – EC2 APIs and Parameters
 
