@@ -10,8 +10,10 @@ theme:
   name: readthedocs
   highlightjs: true
 
-  
-plugins:
-  - search
 
 copyright: Copyright 2018, 2019 Stratoscale Inc.
+google_analytics: ['UA-130577010-1', 'docs.stratodemo.com']
+
+
+plugins:
+  - search
