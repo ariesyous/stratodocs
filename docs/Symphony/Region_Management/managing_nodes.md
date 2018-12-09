@@ -140,9 +140,8 @@ In addition, the monitoring mechanism among nodes (consul) notices that it is no
 
 **How do you recover a node from a fenced state?**
 
-The node autorecovers after 1200 ms (20 minutes).
+The node autorecovers after 300 seconds (5 minutes).
 
 **How can you prevent node fencing?**
 
 Ensure that the network is stable, have stacked/lagged switches, ensure that there are multiple NICs on the hosts connecting to the switch stack in a port redundant effort.
-
