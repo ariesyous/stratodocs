@@ -6,6 +6,8 @@ site_author: Aries
 repo_url: https://github.com/aries-strato/stratodocs/
 edit_uri: ""
 
+site_favicon: img/favicon.ico
+
 theme:
   name: readthedocs
   highlightjs: true
