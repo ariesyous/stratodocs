@@ -177,39 +177,37 @@ Run symp to connect to Symphony cluster
 
 3.  **Run a  `symp`  command to verify**:
 
- 
-
-   $ symp -k -u admin -d cloud_admin -p admin --url https://<ip_of_symphony_region> image list -c name
-    
-    Starting new HTTPS connection (1): demo10.stratoscale.com
-    Connecting in insecure mode!
-    Failed loading virt-network commands
-    
-    +---------------------------------------------------------------------------------------------+
-    | name                                                                                        |
-    +---------------------------------------------------------------------------------------------+
-    | image_bitnami-jenkins-1.658-4-linux-ubuntu-14.04-x86_64765fbc84-7fa9-4bf3-9099-1d4a943982d4 |
-    | dbs_manager_mysql_5_6_001_default_v1                                                        |
-    | linux                                                                                       |
-    | dbs_manager_mysql_5_7_001_default_v1                                                        |
-    | centos1711                                                                                  |
-    | image_bitnami-mysql-5.6.33-3-linux-ubuntu-14.04-x86_64f65a83e6-1fac-442e-9c0a-f0364c9e7905  |
-    | webserver-centos1                                                                           |
-    | centos7-1708                                                                                |
-    | dbs_manager_mariadb_10_1_001_default_1.0                                                    |
-    | mapreduce_manager_mapreduce_1_2_001_default_1.0                                             |
-    | image_bitnami-jenkins-1.658-4-linux-ubuntu-14.04-x86_64faba5616-46ce-4e52-81e8-26b3f5572327 |
-    | windows2012                                                                                 |
-    | image_bitnami-jenkins-1.658-4-linux-ubuntu-14.04-x86_643b70fd8c-082f-4ccc-8e82-f0a1bf534c3f |
-    | dbc_manager_cassandra_3_11_001a_default_1.0                                                 |
-    | dbs_manager_postgresql_9_6_000_default_v1                                                   |
-    | kubernetes-base_v1.8.1                                                                      |
-    | dbs_manager_mysql_5_5_001_default_v1                                                        |
-    | cirros-0.4.0-x86_64-disk.img                                                                |
-    | webserver-centos2                                                                           |
-    | dbc_manager_cassandra_3_0_004_default_1.0                                                   |
-    | image_bitnami-elk-4.6.1-0-linux-ubuntu-14.04-x86_649d0a3261-9e7d-4063-a0f0-13a3d77a2b47     |
-    | nfs_manager_nfs_1_0_002_default_1.0                                                         |
-    | lbaas-engine_v2                                                                             |
-    +---------------------------------------------------------------------------------------------+
+		$ symp -k -u admin -d cloud_admin -p admin --url https://<ip_of_symphony_region> image list -c name
+	    
+	    Starting new HTTPS connection (1): demo10.stratoscale.com
+	    Connecting in insecure mode!
+	    Failed loading virt-network commands
+	    
+	    +---------------------------------------------------------------------------------------------+
+	    | name                                                                                        |
+	    +---------------------------------------------------------------------------------------------+
+	    | image_bitnami-jenkins-1.658-4-linux-ubuntu-14.04-x86_64765fbc84-7fa9-4bf3-9099-1d4a943982d4 |
+	    | dbs_manager_mysql_5_6_001_default_v1                                                        |
+	    | linux                                                                                       |
+	    | dbs_manager_mysql_5_7_001_default_v1                                                        |
+	    | centos1711                                                                                  |
+	    | image_bitnami-mysql-5.6.33-3-linux-ubuntu-14.04-x86_64f65a83e6-1fac-442e-9c0a-f0364c9e7905  |
+	    | webserver-centos1                                                                           |
+	    | centos7-1708                                                                                |
+	    | dbs_manager_mariadb_10_1_001_default_1.0                                                    |
+	    | mapreduce_manager_mapreduce_1_2_001_default_1.0                                             |
+	    | image_bitnami-jenkins-1.658-4-linux-ubuntu-14.04-x86_64faba5616-46ce-4e52-81e8-26b3f5572327 |
+	    | windows2012                                                                                 |
+	    | image_bitnami-jenkins-1.658-4-linux-ubuntu-14.04-x86_643b70fd8c-082f-4ccc-8e82-f0a1bf534c3f |
+	    | dbc_manager_cassandra_3_11_001a_default_1.0                                                 |
+	    | dbs_manager_postgresql_9_6_000_default_v1                                                   |
+	    | kubernetes-base_v1.8.1                                                                      |
+	    | dbs_manager_mysql_5_5_001_default_v1                                                        |
+	    | cirros-0.4.0-x86_64-disk.img                                                                |
+	    | webserver-centos2                                                                           |
+	    | dbc_manager_cassandra_3_0_004_default_1.0                                                   |
+	    | image_bitnami-elk-4.6.1-0-linux-ubuntu-14.04-x86_649d0a3261-9e7d-4063-a0f0-13a3d77a2b47     |
+	    | nfs_manager_nfs_1_0_002_default_1.0                                                         |
+	    | lbaas-engine_v2                                                                             |
+	    +---------------------------------------------------------------------------------------------+
 
