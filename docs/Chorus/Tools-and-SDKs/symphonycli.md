@@ -137,47 +137,49 @@ $ sudo yum install unzip</pre></div></div></div></td></tr></tbody></table>
 
 2.  **Get the symp client installer**:
 
-	$ sudo URL=https://<ip_of_symphony_region> bash -c "$(curl -sSLk https://<ip_of_symphony_region>/install-client.sh)"
-
-
-	Using target cluster url https://<ip_of_symphony_region>
-	Downloading client code...
-	replace /opt/symphony-client/symphony_client/__main__.py? [y]es, [n]o, [A]ll, [N]one, [r]ename: Creating symp binary...
-	Defining environment variables...
-	Installing required pip packages...
-	Collecting cliff
-	  Using cached cliff-2.11.0-py2-none-any.whl
-	Collecting debtcollector
-	  Using cached debtcollector-1.19.0-py2.py3-none-any.whl
-	Requirement already satisfied: stevedore>=1.20.0 in /usr/lib/python2.7/site-packages (from cliff)
-	Requirement already satisfied: pbr!=2.1.0,>=2.0.0 in /usr/lib/python2.7/site-packages (from cliff)
-	Collecting cmd2>=0.6.7 (from cliff)
-	Requirement already satisfied: PrettyTable<0.8,>=0.7.1 in /usr/lib/python2.7/site-packages (from cliff)
-	Collecting unicodecsv>=0.8.0; python_version < "3.0" (from cliff)
-	Requirement already satisfied: six>=1.10.0 in /usr/lib/python2.7/site-packages (from cliff)
-	Requirement already satisfied: pyparsing>=2.1.0 in /usr/lib/python2.7/site-packages (from cliff)
-	Requirement already satisfied: PyYAML>=3.10 in /usr/lib64/python2.7/site-packages (from cliff)
-	Collecting funcsigs>=1.0.0; python_version == "2.7" or python_version == "2.6" (from debtcollector)
-	  Using cached funcsigs-1.0.2-py2.py3-none-any.whl
-	Collecting wrapt>=1.7.0 (from debtcollector)
-	Requirement already satisfied: contextlib2 in /usr/lib/python2.7/site-packages (from cmd2>=0.6.7->cliff)
-	Requirement already satisfied: pyperclip in /usr/lib/python2.7/site-packages (from cmd2>=0.6.7->cliff)
-	Collecting subprocess32 (from cmd2>=0.6.7->cliff)
-	  Using cached subprocess32-3.2.7.tar.gz
-	Building wheels for collected packages: subprocess32
-	  Running setup.py bdist_wheel for subprocess32 ... done
-	  Stored in directory: /root/.cache/pip/wheels/7d/4c/a4/ce9ceb463dae01f4b95e670abd9afc8d65a45f38012f8030cc
-	Successfully built subprocess32
-	Installing collected packages: subprocess32, cmd2, unicodecsv, cliff, funcsigs, wrapt, debtcollector
-	Successfully installed cliff-2.11.0 cmd2-0.8.0 debtcollector-1.19.0 funcsigs-1.0.2 subprocess32-3.2.7 unicodecsv-0.14.1 wrapt-1.10.11
-
-	Installation finished successfully!
+	    $ sudo URL=https://<ip_of_symphony_region> bash -c "$(curl -sSLk https://<ip_of_symphony_region>/install-client.sh)"
+	    
+	    
+	    Using target cluster url https://<ip_of_symphony_region>
+	    Downloading client code...
+	    replace /opt/symphony-client/symphony_client/__main__.py? [y]es, [n]o, [A]ll, [N]one, [r]ename: Creating symp binary...
+	    Defining environment variables...
+	    Installing required pip packages...
+	    Collecting cliff
+	      Using cached cliff-2.11.0-py2-none-any.whl
+	    Collecting debtcollector
+	      Using cached debtcollector-1.19.0-py2.py3-none-any.whl
+	    Requirement already satisfied: stevedore>=1.20.0 in /usr/lib/python2.7/site-packages (from cliff)
+	    Requirement already satisfied: pbr!=2.1.0,>=2.0.0 in /usr/lib/python2.7/site-packages (from cliff)
+	    Collecting cmd2>=0.6.7 (from cliff)
+	    Requirement already satisfied: PrettyTable<0.8,>=0.7.1 in /usr/lib/python2.7/site-packages (from cliff)
+	    Collecting unicodecsv>=0.8.0; python_version < "3.0" (from cliff)
+	    Requirement already satisfied: six>=1.10.0 in /usr/lib/python2.7/site-packages (from cliff)
+	    Requirement already satisfied: pyparsing>=2.1.0 in /usr/lib/python2.7/site-packages (from cliff)
+	    Requirement already satisfied: PyYAML>=3.10 in /usr/lib64/python2.7/site-packages (from cliff)
+	    Collecting funcsigs>=1.0.0; python_version == "2.7" or python_version == "2.6" (from debtcollector)
+	      Using cached funcsigs-1.0.2-py2.py3-none-any.whl
+	    Collecting wrapt>=1.7.0 (from debtcollector)
+	    Requirement already satisfied: contextlib2 in /usr/lib/python2.7/site-packages (from cmd2>=0.6.7->cliff)
+	    Requirement already satisfied: pyperclip in /usr/lib/python2.7/site-packages (from cmd2>=0.6.7->cliff)
+	    Collecting subprocess32 (from cmd2>=0.6.7->cliff)
+	      Using cached subprocess32-3.2.7.tar.gz
+	    Building wheels for collected packages: subprocess32
+	      Running setup.py bdist_wheel for subprocess32 ... done
+	      Stored in directory: /root/.cache/pip/wheels/7d/4c/a4/ce9ceb463dae01f4b95e670abd9afc8d65a45f38012f8030cc
+	    Successfully built subprocess32
+	    Installing collected packages: subprocess32, cmd2, unicodecsv, cliff, funcsigs, wrapt, debtcollector
+	    Successfully installed cliff-2.11.0 cmd2-0.8.0 debtcollector-1.19.0 funcsigs-1.0.2 subprocess32-3.2.7 unicodecsv-0.14.1 wrapt-1.10.11
+	    
+	    Installation finished successfully!
 
 Run symp to connect to Symphony cluster
 
 3.  **Run a  `symp`  command to verify**:
 
-    $ symp -k -u admin -d cloud_admin -p admin --url https://<ip_of_symphony_region> image list -c name
+ 
+
+   $ symp -k -u admin -d cloud_admin -p admin --url https://<ip_of_symphony_region> image list -c name
     
     Starting new HTTPS connection (1): demo10.stratoscale.com
     Connecting in insecure mode!
@@ -210,3 +212,4 @@ Run symp to connect to Symphony cluster
     | nfs_manager_nfs_1_0_002_default_1.0                                                         |
     | lbaas-engine_v2                                                                             |
     +---------------------------------------------------------------------------------------------+
+
