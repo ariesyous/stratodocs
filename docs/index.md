@@ -4,6 +4,7 @@ Use the left navigation pane to browse topics and articles, and you can also use
 
 
 **Top priority**
+
  - Complete adding rest of existing documents, organize and build a nav bar (instead of existing one)
  - Fix URL's and static links to old documentation so it references the file structure and not old strato site via long URL's
  - Add more documentation!
