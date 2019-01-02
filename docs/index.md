@@ -10,6 +10,7 @@ Use the left navigation pane to browse topics and articles, and you can also use
  - Add more documentation!
 
 **Lower priority**
+
  - Stratoscale logo branding/customization 
  - Add feature to export to PDF, mobi, epub
  - Widen content for desktop via css
