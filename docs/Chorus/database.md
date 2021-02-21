@@ -2,7 +2,7 @@
 
 ## DBaaS Overview
 
-Symphony Database as a Service allows you to provision a variety of relational and non-relational databases with the click of a button. This is an RDS-compatible solution, you can also use AWS compatible API's to work with this service.
+Symphony Database as a Service allows you to provision a variety of relational and non-relational databases with the click of a button. This is an RDS-compatible solution, you can also use AWS compatible APIs to work with this service.
 
 **To set up and use the database service**:
 
@@ -21,7 +21,7 @@ You must be an admin user to do the tasks described in this section and its sub-
 The Symphony database service lets you provision and manage the following database instances:
 
 -   MySQL 5.5, 5.6, and 5.7
--   PostgreSQL 9.6
+-   PostgreSQL 9.6 and 11
 -   MariaDB 10.1
 - MongoDB
 - Redis
@@ -69,8 +69,8 @@ The new database instance appears in the database instances view (**Menu** > **D
 
 Here is an example of how to create a database instance using the CLI:
 
-		$ dbs instance create engine_version_id=1 name=myNewInstance 
-		  storage_pool_id=2 network_id=3 db_name=myDB master_user_name=user 
+		$ dbs instance create engine_version_id=1 name=myNewInstance
+		  storage_pool_id=2 network_id=3 db_name=myDB master_user_name=user
 		  master_user_password=password --port=3306 --external-network-id=4
 
 # Editing a Parameter Group
